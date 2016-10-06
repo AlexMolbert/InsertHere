@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>WebApp Home Page</title>
+	<title>Tag It Home</title>
+	    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="blog.css" rel="stylesheet">
 </head>
 <body ng-controller="WelcomeCtrl">
 
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a href="#" class="navbar-brand">Tag It!</a>
+			<a href="#" class="navbar-brand">TagIt</a>
 		</div>
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="#/welcome">Home</a></li>
 			<li><a href="#/addPost">Add Post</a></li>
-			<li><a href="#/addPost">Add Post</a></li>
+			<li><a href="#/addPost">Upload File</a></li>
 			<li ng-click="logout()"><a href="#">Logout</a></li>
 		</ul>
 	</div>
@@ -43,7 +45,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4>Edit Post Details</h4>
+					<h4>Edit File Details</h4>
 				</div>
 				<div class="modal-body">
 					<form role="form">
@@ -52,7 +54,7 @@
 							<input type="text" name="title" class="form-control" ng-model="editPostData.title" />
 						</div>
 						<div class="form-group">
-							<label for="post">Post</label>
+							<label for="post">About</label>
 							<textarea name="post" class="form-control" ng-model="editPostData.post"></textarea>
 						</div>
 					</form>

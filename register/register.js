@@ -1,35 +1,30 @@
-'use strict';
+'use restrict';
 
-angular.module('myApp.register', ['ngRoute','firebase'])
+angular.module('webApp.register', ['ngRoute', 'firebase'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/register', {
-    templateUrl: 'register/register.html',
-    controller: 'RegisterCtrl'
-  });
+.config(['$routeProvider', function($routeProvider){
+	$routeProvider.when('/register', {
+		templateUrl: 'register/register.html',
+		controller: 'RegisterCtrl'
+	});
 }])
 
-.controller('RegisterCtrl', ['$scope','$location','$firebaseAuth', function($scope,$location,$firebaseAuth) {
- 	$scope.mesg = 'Hello';
- 	var firebaseObj = new Firebase("https://seniorinsertheredesign.firebaseio.com");
-var auth = $firebaseAuth(firebaseObj);
-        $scope.signUp = function() {
-    if (!$scope.regForm.$invalid) {
-        var email = $scope.user.email;
-        var password = $scope.user.password;
-        if (email && password) {
-            auth.$createUser(email, password)
-                .then(function() {
-                    // do things if success
-                    console.log('User creation success');
-                    $location.path('/home');
-                }, function(error) {
-                    // do things if failure
-                    console.log(error);
-                    $scope.regError = true;
-                    $scope.regErrorMessage = error.message;
-                });
-        }
-    }
-};
-}]);
+.controller('RegisterCtrl', ['$scope', '$firebaseAuth', '$location', function($scope, $firebaseAuth, $location){
+
+	$scope.signUp = function(){
+		var username = $scope.user.email;
+		var password = $scope.user.password;
+
+		if(username && password){
+			var auth = $firebaseAuth();
+			auth.$createUserWithEmailAndPassword(username, password).then(function(){
+				console.log("User Successfully Created");
+				$location.path('/home');
+			}).catch(function(error){
+				$scope.errMsg = true;
+				$scope.errorMessage = error.message;
+			});
+		}
+	}
+
+}])
