@@ -1,37 +1,87 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+<html>
+<head>
+	<title>WebApp Home Page</title>
+</head>
+<body ng-controller="WelcomeCtrl">
 
-    <title>AngularJS & Firebase Web App</title>
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a href="#" class="navbar-brand">Tag It!</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="#/welcome">Home</a></li>
+			<li><a href="#/addPost">Add Post</a></li>
+			<li><a href="#/addPost">Add Post</a></li>
+			<li ng-click="logout()"><a href="#">Logout</a></li>
+		</ul>
+	</div>
+</nav>
 
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="blog.css" rel="stylesheet">
-    
-  </head>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Welcome Home {{username}} !</h3>
+		</div>
+	</div>
+</div>
 
-  <body>
+<div class="container">
+	<div class="row" ng-repeat="article in articles">
+		<div class="col-md-12 well well-sm">
+			<h4>{{article.title}}</h4>
+			<p>{{article.post}}</p>
+			<button type="submit" class="btn btn-sm btn-primary" ng-click="editPost(article.$id)" data-target="#editModal" data-toggle="modal">Edit</button>
+			<button type="submit" class="btn btn-sm btn-danger" ng-click="deleteCnf(article)" data-target="#deleteModal" data-toggle="modal">Delete</button>
+		</div>
+	</div>
+</div>
 
-    <div class="blog-masthead">
-      <div class="container">
-        <nav class="blog-nav">
-          <a class="blog-nav-item active" href="#">Home</a>
-          <a class="blog-nav-item " href="addPost.html">Add Post</a>
-          
-        </nav>
-      </div>
-    </div>
-   <div class="container">
-      <div class="page-header">
-        <h1>AngularJS & Firebase App</h1>
-      </div>
-      <p class="lead">Welcome home <b>{{username}}</b> !!</p>
-      
-    </div> 
+<div class="container">
+	<div id="editModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4>Edit Post Details</h4>
+				</div>
+				<div class="modal-body">
+					<form role="form">
+						<div class="form-group">
+							<label for="title">Title</label>
+							<input type="text" name="title" class="form-control" ng-model="editPostData.title" />
+						</div>
+						<div class="form-group">
+							<label for="post">Post</label>
+							<textarea name="post" class="form-control" ng-model="editPostData.post"></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-primary" ng-click="updatePost(editPostData.$id)">Update Post</button>
+					<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-    <footer class="footer">
-      <div class="container">
-        <p class="text-muted"></p>
-      </div>
-    </footer>
+<div class="container">
+	<div id="deleteModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header"></div>
+				<div class="modal-body">
+					<p>Are you sure you want to delete the post?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-danger" ng-click="deletePost(deleteArticle)">Delete</button>
+					<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-</body></html>
+</body>
+</html>
