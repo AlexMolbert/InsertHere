@@ -1,2 +1,2 @@
 # InsertHere
-obligatory README.
+Old mockup for TagIt Senior Seminar Project
